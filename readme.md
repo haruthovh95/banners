@@ -3,8 +3,8 @@
 1) Install with Terminal
     ```
     composer require zakhayko/banners
-    php artisan migrate
     php artisan vendor:publish --provider Zakhayko\Banners\ServiceProvider
+    php artisan migrate
     ```
 2) Add route
     ```php
