@@ -1,0 +1,48 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\File;
+use Zakhayko\Banners\RenderBanners;
+
+class BannersController extends Controller
+{
+    use RenderBanners;
+
+    protected function set_image($settings, $value, $banner){
+        if (empty($value)) return $banner;
+        $path = config('banners.upload_dir');
+        if (!file_exists($path)) mkdir($path, 0775, true);
+        $name = microtime(true).'.'.$value->extension();
+        $value->move($path, $name);
+        if ($banner) File::delete($path.$banner);
+        return $name;
+    }
+
+    protected function beforeSave($page){
+        session()->flash('saved');
+    }
+
+    protected function beforeView($page) {
+        $this->with(['page'=>$page]);
+    }
+
+    protected $settings = [
+        'example' => [
+            'data' => [
+                'params' => [
+                    'title' => 'input',
+                    'multilang' => 'input_m',
+                    'image' => [
+                        'type'=>'image'
+                    ]
+                ]
+            ],
+            'card' => [
+                'count'=>5,
+                'params'=>[
+                    'title'=>'input'
+                ]
+            ]
+        ]
+    ];
+}

@@ -1,0 +1,35 @@
+{
+    "name": "zakhayko/banners",
+    "description": "Banners for Laravel",
+    "license": "MIT",
+    "homepage": "https://github.com/zakhayko/banners",
+    "authors": [
+        {
+            "name": "Hayko",
+            "email": "zakhayko@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.2.0",
+        "laravel/framework": ">=5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zakhayko\\Banners\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zakhayko\\Banners\\ServiceProvider"
+            ]
+        }
+    }
+}
