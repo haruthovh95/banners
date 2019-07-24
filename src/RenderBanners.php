@@ -32,6 +32,12 @@ trait RenderBanners {
             if (array_key_exists($key, $request)) {
                 $inputs = $request[$key];
                 $count = $params['count']??1;
+                $thisBanner = $this->data['banners'][$key];
+                if (count($thisBanner)>$count) {
+                    $rows = $thisBanner->pluck('id')->toArray();
+                    array_splice($rows, 0, $count);
+                    Banner::whereIn('id', $rows)->delete();
+                }
                 for($i=0;$i<$count;$i++) {
                     $this->updateData($params['params'], $inputs[$i]??null, $key, $i);
                 }
