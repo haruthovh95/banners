@@ -32,7 +32,7 @@ trait RenderBanners {
             if (array_key_exists($key, $request)) {
                 $inputs = $request[$key];
                 $count = $params['count']??1;
-                $thisBanner = $this->data['banners'][$key];
+                $thisBanner = $this->data['banners'][$key]??[];
                 if (count($thisBanner)>$count) {
                     $rows = $thisBanner->pluck('id')->toArray();
                     array_splice($rows, 0, $count);
