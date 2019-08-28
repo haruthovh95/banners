@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Zakhayko\Banners\Object\BannerElement;
 use Zakhayko\Banners\Object\BannerObject;
+use Zakhayko\Banners\Object\FakeObject;
 
 class Banner extends Model
 {
@@ -35,8 +36,7 @@ class Banner extends Model
             Cache::forever($cacheKey, $result);
             return $result;
         }
-        return null;
-
+        return config('banners.ignore_exceptions_if_empty', false)?(new FakeObject()):null;
     }
     public static function getBanners($page){
         return self::select('id', 'key', 'data')->where('page', $page)->sort()->get()->mapToGroups(function($item){

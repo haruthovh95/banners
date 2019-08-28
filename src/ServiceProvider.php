@@ -39,7 +39,7 @@ class ServiceProvider extends BaseServiceProvider
             __DIR__.'/config.php' => config_path('banners.php'),
             __DIR__.'/views' => resource_path('views/vendor/banners'),
             __DIR__.'/controller' => app_path('Http/Controllers/BannersController.php'),
-        ]);
+        ], 'banners');
         Blade::directive('banner', function ($expression) {
             return "<?php echo banner(\$params, \$banners, \$key??null, \$i??0, $expression) ?>";
         });
