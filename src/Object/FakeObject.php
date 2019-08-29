@@ -29,6 +29,10 @@ class FakeObject implements \ArrayAccess, \Countable, \IteratorAggregate
     public function __get($argument){
         return $this;
     }
+    
+    public function __call($method, $arguments){
+        return $this;
+    }
 
     public function __toString()
     {
