@@ -17,6 +17,7 @@ trait RenderBanners {
     public function render($page) {
         if (!array_key_exists($page, $this->settings)) abort(404);
         $this->page = $page;
+        if (method_exists($this, 'beforeRender')) $this->beforeRender($this->page);
         $this->data['params'] = $this->settings[$page];
         $this->data['banners'] = Banner::getBanners($this->page);
         if (Request::getMethod()=='POST') {
